@@ -1,17 +1,14 @@
 import * as functions from 'firebase-functions';
 
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+// Start writing Firebase Functions
+// https://firebase.google.com/docs/functions/typescript
 
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 export const helloWorld: functions.HttpsFunction = functions.https.onRequest(
   (request: functions.Request, response: functions.Response): void => {
-    response.send('Hello Firebase Functions!!\n\n');
+    const name = (request.query && request.query.name) || 'world';
+    response.send(`Hello ${name} from Firebase!`);
   },
 );
